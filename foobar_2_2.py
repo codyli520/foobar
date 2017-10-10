@@ -1,21 +1,30 @@
-def answer(h,q):
-	num_node = 2**h - 1
-	num_leaf = 2**(h-1)
+def answer(h, q):
+    output = []
 
-	nodes = [x+1 for x in range(num_node)]
+    for node in q:
+        size = 2**h - 1
+        before = 0
+        if node == size:
+            output.append(-1)
+            continue
 
-	tree= {}
+        while True:
+            size /= 2
+            left = before + size
+            right = left + size
+            parent = right + 1
 
-	while len(nodes)>2:
-		node = nodes.pop()
-		left_child = nodes.pop(len(nodes)/2-1)
-		right_child = nodes.pop(len(nodes)-1)
-		tree[node] = {"left":left_child,"right":right_child}
-		
-	
-	return tree
+            if left == node or right == node:
+                output.append(parent)
+                break
+            if node > left:
+                before = left
+                
+    return output
+
 
 
 if __name__ == "__main__":
 
-	print answer(3,10)
+    print answer(5,[19,14,28])
+    print answer(3,[7,3,5,1])
