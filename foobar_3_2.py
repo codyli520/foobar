@@ -16,3 +16,6 @@ def answer(l):
         i_ls = []
         k_ls = []
     return count
+
+if __name__ == "__main__":
+    print answer([1,1,1]) == 1
